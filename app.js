@@ -80,11 +80,7 @@ input.addEventListener("input", (e) => {
     for (let i = 0; i < typed.length; i++) {
       const char = typed[i];
       if (i < currentWord.length) {
-        if (char === currentWord[i]) {
-          // Correct character
-        } else {
-          // Wrong character
-        }
+        engine.handleInput(char);
       }
     }
 
