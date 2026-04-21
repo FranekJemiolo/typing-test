@@ -66,6 +66,16 @@ input.addEventListener("input", (e) => {
   }
 
   if (engine.getState() === GameState.RUNNING) {
+    // Check if space was pressed (input ends with space)
+    if (typed.endsWith(" ")) {
+      // Skip to next word
+      engine.skipWord();
+      input.value = "";
+      renderer.renderWord(engine.getCurrentWord(), "");
+      updateStatsDisplay(engine.getStats());
+      return;
+    }
+
     // Track character-by-character for stats
     for (let i = 0; i < typed.length; i++) {
       const char = typed[i];
@@ -80,17 +90,6 @@ input.addEventListener("input", (e) => {
 
     engine.updateTyped(typed);
     renderer.renderWord(currentWord, typed);
-    updateStatsDisplay(engine.getStats());
-  }
-});
-
-// Handle space key to skip to next word
-input.addEventListener("keydown", (e) => {
-  if (e.key === " " && engine.getState() === GameState.RUNNING) {
-    e.preventDefault();
-    engine.skipWord();
-    input.value = "";
-    renderer.renderWord(engine.getCurrentWord(), "");
     updateStatsDisplay(engine.getStats());
   }
 });
