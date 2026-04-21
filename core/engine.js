@@ -98,7 +98,14 @@ export class TypingEngine {
 
   finish() {
     if (this.state !== GameState.RUNNING) return;
-    
+
+    // Record missed characters for the current word
+    const currentWord = this.wordProvider.getCurrentWord();
+    const missed = currentWord.length - this.currentTyped.length;
+    for (let i = 0; i < missed; i++) {
+      this.stats.recordMissed();
+    }
+
     this.state = GameState.FINISHED;
     this.stats.stop();
     if (this.timerInterval) {
