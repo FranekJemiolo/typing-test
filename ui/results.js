@@ -27,6 +27,10 @@ export class ResultsPanel {
           <span class="result-label">Errors</span>
         </div>
         <div class="result-item">
+          <span class="result-value">${stats.missedChars}</span>
+          <span class="result-label">Missed</span>
+        </div>
+        <div class="result-item">
           <span class="result-value">${stats.keysPressed}</span>
           <span class="result-label">Keys</span>
         </div>

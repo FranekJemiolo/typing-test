@@ -17,6 +17,7 @@ const timerValueElement = document.getElementById("timer-value");
 const keysElement = document.getElementById("keys");
 const correctElement = document.getElementById("correct");
 const errorsElement = document.getElementById("errors");
+const missedElement = document.getElementById("missed");
 const wpmElement = document.getElementById("wpm");
 const accuracyElement = document.getElementById("accuracy");
 
@@ -40,6 +41,7 @@ function updateStatsDisplay(stats) {
   keysElement.textContent = stats.keysPressed;
   correctElement.textContent = stats.correctChars;
   errorsElement.textContent = stats.errors;
+  missedElement.textContent = stats.missedChars;
   wpmElement.textContent = stats.wpm;
   accuracyElement.textContent = stats.accuracy;
 }

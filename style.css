@@ -90,6 +90,10 @@ body {
   font-family: 'Courier New', monospace;
 }
 
+.error-value {
+  color: var(--error-color);
+}
+
 .word-box {
   font-size: 32px;
   margin: 30px auto;

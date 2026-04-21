@@ -8,6 +8,7 @@ export class StatsTracker {
     this.keysPressed = 0;
     this.correctChars = 0;
     this.errors = 0;
+    this.missedChars = 0;
     this.startTime = null;
     this.endTime = null;
   }
@@ -30,6 +31,10 @@ export class StatsTracker {
 
   recordError() {
     this.errors++;
+  }
+
+  recordMissed() {
+    this.missedChars++;
   }
 
   getElapsedTime() {
@@ -70,6 +75,7 @@ export class StatsTracker {
       keysPressed: this.keysPressed,
       correctChars: this.correctChars,
       errors: this.errors,
+      missedChars: this.missedChars,
       wpm: this.getWPM(),
       accuracy: this.getAccuracy(),
       elapsedTime: this.getElapsedTime(),
