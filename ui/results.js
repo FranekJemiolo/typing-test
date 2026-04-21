@@ -36,18 +36,18 @@ export class ResultsPanel {
         </div>
       </div>
       <div class="result-buttons">
-        <button id="download-btn" class="btn-primary">Download Image</button>
-        <button id="restart-btn" class="btn-secondary">Restart</button>
+        <button id="result-download-btn" class="btn-primary">Download Image</button>
+        <button id="result-restart-btn" class="btn-secondary">Restart</button>
       </div>
     `;
 
     this.container.appendChild(this.panel);
 
-    document.getElementById("download-btn").addEventListener("click", () => {
+    document.getElementById("result-download-btn").addEventListener("click", () => {
       this.onDownload(stats);
     });
 
-    document.getElementById("restart-btn").addEventListener("click", () => {
+    document.getElementById("result-restart-btn").addEventListener("click", () => {
       this.onRestart();
     });
   }
