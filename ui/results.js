@@ -23,6 +23,14 @@ export class ResultsPanel {
           <span class="result-label">Accuracy</span>
         </div>
         <div class="result-item">
+          <span class="result-value">${stats.completedWords}</span>
+          <span class="result-label">Completed</span>
+        </div>
+        <div class="result-item">
+          <span class="result-value">${stats.failedWords}</span>
+          <span class="result-label">Failed</span>
+        </div>
+        <div class="result-item">
           <span class="result-value">${stats.errors}</span>
           <span class="result-label">Errors</span>
         </div>

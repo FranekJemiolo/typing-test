@@ -9,6 +9,8 @@ export class StatsTracker {
     this.correctChars = 0;
     this.errors = 0;
     this.missedChars = 0;
+    this.completedWords = 0;
+    this.failedWords = 0;
     this.startTime = null;
     this.endTime = null;
   }
@@ -35,6 +37,14 @@ export class StatsTracker {
 
   recordMissed() {
     this.missedChars++;
+  }
+
+  recordCompletedWord() {
+    this.completedWords++;
+  }
+
+  recordFailedWord() {
+    this.failedWords++;
   }
 
   getElapsedTime() {
@@ -76,6 +86,8 @@ export class StatsTracker {
       correctChars: this.correctChars,
       errors: this.errors,
       missedChars: this.missedChars,
+      completedWords: this.completedWords,
+      failedWords: this.failedWords,
       wpm: this.getWPM(),
       accuracy: this.getAccuracy(),
       elapsedTime: this.getElapsedTime(),

@@ -34,27 +34,28 @@ export async function generateResultImage(data) {
   ctx.fillStyle = "#ffffff";
   ctx.font = "32px Arial, sans-serif";
   ctx.fillText(`Accuracy: ${data.accuracy}%`, 60, 360);
-  ctx.fillText(`Errors: ${data.errors}`, 60, 410);
-  ctx.fillText(`Missed: ${data.missedChars}`, 60, 460);
-  ctx.fillText(`Keys: ${data.keysPressed}`, 60, 510);
+  ctx.fillText(`Completed: ${data.completedWords}`, 60, 410);
+  ctx.fillText(`Failed: ${data.failedWords}`, 60, 460);
+  ctx.fillText(`Errors: ${data.errors}`, 60, 510);
+  ctx.fillText(`Keys: ${data.keysPressed}`, 60, 560);
 
   // Decorative line
   ctx.strokeStyle = "#333333";
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(60, 550);
-  ctx.lineTo(1140, 550);
+  ctx.moveTo(60, 600);
+  ctx.lineTo(1140, 600);
   ctx.stroke();
 
   // Watermark
   ctx.globalAlpha = 0.4;
   ctx.fillStyle = "#666666";
   ctx.font = "20px Arial, sans-serif";
-  ctx.fillText("Generated on github.io typing test", 60, 590);
+  ctx.fillText("Generated on github.io typing test", 60, 630);
 
   // Date
   const date = new Date().toLocaleDateString();
-  ctx.fillText(date, 60, 615);
+  ctx.fillText(date, 60, 655);
 
   ctx.globalAlpha = 1.0;
 

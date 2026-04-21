@@ -82,13 +82,18 @@ export class TypingEngine {
   skipWord() {
     if (this.state !== GameState.RUNNING) return;
 
-    // Record missed characters for the current word (only if incomplete)
     const currentWord = this.wordProvider.getCurrentWord();
+
+    // Record missed characters for the current word (only if incomplete)
     if (this.currentTyped !== currentWord) {
       const missed = currentWord.length - this.currentTyped.length;
       for (let i = 0; i < missed; i++) {
         this.stats.recordMissed();
       }
+      this.stats.recordFailedWord();
+    } else {
+      // Word was completed correctly
+      this.stats.recordCompletedWord();
     }
 
     this.wordProvider.nextWord();
@@ -98,13 +103,18 @@ export class TypingEngine {
   finish() {
     if (this.state !== GameState.RUNNING) return;
 
-    // Record missed characters for the current word (only if incomplete)
     const currentWord = this.wordProvider.getCurrentWord();
+
+    // Record missed characters for the current word (only if incomplete)
     if (this.currentTyped !== currentWord) {
       const missed = currentWord.length - this.currentTyped.length;
       for (let i = 0; i < missed; i++) {
         this.stats.recordMissed();
       }
+      this.stats.recordFailedWord();
+    } else if (this.currentTyped.length > 0) {
+      // Word was completed correctly (and had some characters typed)
+      this.stats.recordCompletedWord();
     }
 
     this.state = GameState.FINISHED;

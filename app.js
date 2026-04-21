@@ -18,6 +18,8 @@ const keysElement = document.getElementById("keys");
 const correctElement = document.getElementById("correct");
 const errorsElement = document.getElementById("errors");
 const missedElement = document.getElementById("missed");
+const completedElement = document.getElementById("completed");
+const failedElement = document.getElementById("failed");
 const wpmElement = document.getElementById("wpm");
 const accuracyElement = document.getElementById("accuracy");
 
@@ -42,6 +44,8 @@ function updateStatsDisplay(stats) {
   correctElement.textContent = stats.correctChars;
   errorsElement.textContent = stats.errors;
   missedElement.textContent = stats.missedChars;
+  completedElement.textContent = stats.completedWords;
+  failedElement.textContent = stats.failedWords;
   wpmElement.textContent = stats.wpm;
   accuracyElement.textContent = stats.accuracy;
 }
