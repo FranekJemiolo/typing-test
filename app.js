@@ -60,6 +60,7 @@ engine.onStateChange((state, stats) => {
 input.addEventListener("input", (e) => {
   const typed = e.target.value;
   const currentWord = engine.getCurrentWord();
+  const previousTyped = engine.getTyped();
 
   if (engine.getState() === GameState.IDLE && typed.length > 0) {
     engine.start();
@@ -76,10 +77,11 @@ input.addEventListener("input", (e) => {
       return;
     }
 
-    // Track character-by-character for stats
-    for (let i = 0; i < typed.length; i++) {
-      const char = typed[i];
-      if (i < currentWord.length) {
+    // Track only the new character(s) that were added
+    if (typed.length > previousTyped.length) {
+      // Characters were added - pass each new character to engine
+      for (let i = previousTyped.length; i < typed.length; i++) {
+        const char = typed[i];
         engine.handleInput(char);
       }
     }
