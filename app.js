@@ -84,6 +84,17 @@ input.addEventListener("input", (e) => {
   }
 });
 
+// Handle space key to skip to next word
+input.addEventListener("keydown", (e) => {
+  if (e.key === " " && engine.getState() === GameState.RUNNING) {
+    e.preventDefault();
+    engine.skipWord();
+    input.value = "";
+    renderer.renderWord(engine.getCurrentWord(), "");
+    updateStatsDisplay(engine.getStats());
+  }
+});
+
 // Handle restart
 function handleRestart() {
   engine.restart();

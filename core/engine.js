@@ -76,6 +76,18 @@ export class TypingEngine {
     }
   }
 
+  skipWord() {
+    if (this.state !== GameState.RUNNING) return;
+
+    this.wordProvider.nextWord();
+    this.currentTyped = "";
+    
+    // Check if we've completed all words (looped back to start)
+    if (this.wordProvider.currentIndex === 0) {
+      this.finish();
+    }
+  }
+
   finish() {
     if (this.state !== GameState.RUNNING) return;
     
