@@ -75,24 +75,21 @@ export class TypingEngine {
     this.currentTyped = text;
     const currentWord = this.wordProvider.getCurrentWord();
 
-    // Check if word is complete
-    if (text === currentWord) {
-      this.wordProvider.nextWord();
-      this.currentTyped = "";
-    }
+    // Word completion is now handled by space bar only
+    // Do not automatically move to next word
   }
 
   skipWord() {
     if (this.state !== GameState.RUNNING) return;
 
-    // Record missed characters for the current word
+    // Record missed characters for the current word (only if incomplete)
     const currentWord = this.wordProvider.getCurrentWord();
-    const missed = currentWord.length - this.currentTyped.length;
-    console.log('skipWord:', { currentWord, currentTyped: this.currentTyped, missed });
-    for (let i = 0; i < missed; i++) {
-      this.stats.recordMissed();
+    if (this.currentTyped !== currentWord) {
+      const missed = currentWord.length - this.currentTyped.length;
+      for (let i = 0; i < missed; i++) {
+        this.stats.recordMissed();
+      }
     }
-    console.log('Missed chars after skip:', this.stats.missedChars);
 
     this.wordProvider.nextWord();
     this.currentTyped = "";
@@ -101,11 +98,13 @@ export class TypingEngine {
   finish() {
     if (this.state !== GameState.RUNNING) return;
 
-    // Record missed characters for the current word
+    // Record missed characters for the current word (only if incomplete)
     const currentWord = this.wordProvider.getCurrentWord();
-    const missed = currentWord.length - this.currentTyped.length;
-    for (let i = 0; i < missed; i++) {
-      this.stats.recordMissed();
+    if (this.currentTyped !== currentWord) {
+      const missed = currentWord.length - this.currentTyped.length;
+      for (let i = 0; i < missed; i++) {
+        this.stats.recordMissed();
+      }
     }
 
     this.state = GameState.FINISHED;
