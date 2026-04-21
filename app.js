@@ -37,6 +37,7 @@ themeManager.applyTheme("dark");
 
 // Update stats display
 function updateStatsDisplay(stats) {
+  console.log('updateStatsDisplay:', stats);
   timerValueElement.textContent = stats.remainingTime;
   keysElement.textContent = stats.keysPressed;
   correctElement.textContent = stats.correctChars;

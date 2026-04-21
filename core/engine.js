@@ -88,9 +88,11 @@ export class TypingEngine {
     // Record missed characters for the current word
     const currentWord = this.wordProvider.getCurrentWord();
     const missed = currentWord.length - this.currentTyped.length;
+    console.log('skipWord:', { currentWord, currentTyped: this.currentTyped, missed });
     for (let i = 0; i < missed; i++) {
       this.stats.recordMissed();
     }
+    console.log('Missed chars after skip:', this.stats.missedChars);
 
     this.wordProvider.nextWord();
     this.currentTyped = "";

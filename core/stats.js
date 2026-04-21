@@ -35,6 +35,7 @@ export class StatsTracker {
 
   recordMissed() {
     this.missedChars++;
+    console.log('recordMissed called, missedChars:', this.missedChars);
   }
 
   getElapsedTime() {
