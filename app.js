@@ -13,6 +13,7 @@ const renderer = new WordRenderer(wordBox);
 const resultsContainer = document.getElementById("results-container");
 
 // Stats elements
+const timerValueElement = document.getElementById("timer-value");
 const keysElement = document.getElementById("keys");
 const correctElement = document.getElementById("correct");
 const errorsElement = document.getElementById("errors");
@@ -35,6 +36,7 @@ themeManager.applyTheme("dark");
 
 // Update stats display
 function updateStatsDisplay(stats) {
+  timerValueElement.textContent = stats.remainingTime;
   keysElement.textContent = stats.keysPressed;
   correctElement.textContent = stats.correctChars;
   errorsElement.textContent = stats.errors;
@@ -48,11 +50,20 @@ engine.onStateChange((state, stats) => {
 
   if (state === GameState.FINISHED) {
     input.disabled = true;
+    input.style.display = "none";
+    wordBox.style.display = "none";
+    document.querySelector(".input-container").style.display = "none";
+    document.querySelector(".controls").style.display = "none";
     resultsPanel.show(stats);
   } else if (state === GameState.IDLE) {
     input.disabled = false;
     input.value = "";
+    input.style.display = "block";
+    wordBox.style.display = "inline-block";
+    document.querySelector(".input-container").style.display = "block";
+    document.querySelector(".controls").style.display = "block";
     resultsPanel.hide();
+    timerValueElement.textContent = "60";
   }
 });
 
@@ -99,6 +110,11 @@ function handleRestart() {
   updateStatsDisplay(engine.getStats());
   input.disabled = false;
   input.value = "";
+  input.style.display = "block";
+  wordBox.style.display = "inline-block";
+  document.querySelector(".input-container").style.display = "block";
+  document.querySelector(".controls").style.display = "block";
+  timerValueElement.textContent = "60";
   input.focus();
 }
 

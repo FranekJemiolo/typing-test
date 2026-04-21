@@ -1,5 +1,6 @@
 export class StatsTracker {
-  constructor() {
+  constructor(timeLimit = 60) {
+    this.timeLimit = timeLimit;
     this.reset();
   }
 
@@ -41,6 +42,17 @@ export class StatsTracker {
     return this.getElapsedTime() / 60;
   }
 
+  getRemainingTime() {
+    if (!this.startTime) return this.timeLimit;
+    const elapsed = this.getElapsedTime();
+    const remaining = this.timeLimit - elapsed;
+    return Math.max(0, Math.round(remaining));
+  }
+
+  isTimeUp() {
+    return this.getRemainingTime() <= 0;
+  }
+
   getWPM() {
     const elapsedMinutes = this.getElapsedTimeMinutes();
     if (elapsedMinutes <= 0) return 0;
@@ -60,7 +72,8 @@ export class StatsTracker {
       errors: this.errors,
       wpm: this.getWPM(),
       accuracy: this.getAccuracy(),
-      elapsedTime: this.getElapsedTime()
+      elapsedTime: this.getElapsedTime(),
+      remainingTime: this.getRemainingTime()
     };
   }
 }

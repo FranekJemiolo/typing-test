@@ -14,6 +14,7 @@ export class TypingEngine {
     this.stats = new StatsTracker();
     this.currentTyped = "";
     this.listeners = [];
+    this.timerInterval = null;
   }
 
   async initialize() {
@@ -37,6 +38,16 @@ export class TypingEngine {
     this.wordProvider.reset();
     this.stats.start();
     this.notifyListeners();
+
+    // Start timer interval to check for time up and update display
+    this.timerInterval = setInterval(() => {
+      if (this.stats.isTimeUp()) {
+        this.finish();
+      } else {
+        // Notify listeners to update timer display
+        this.notifyListeners();
+      }
+    }, 100); // Update every 100ms
   }
 
   handleInput(char) {
@@ -68,11 +79,6 @@ export class TypingEngine {
     if (text === currentWord) {
       this.wordProvider.nextWord();
       this.currentTyped = "";
-      
-      // Check if we've completed all words (looped back to start)
-      if (this.wordProvider.currentIndex === 0) {
-        this.finish();
-      }
     }
   }
 
@@ -81,11 +87,6 @@ export class TypingEngine {
 
     this.wordProvider.nextWord();
     this.currentTyped = "";
-    
-    // Check if we've completed all words (looped back to start)
-    if (this.wordProvider.currentIndex === 0) {
-      this.finish();
-    }
   }
 
   finish() {
@@ -93,6 +94,10 @@ export class TypingEngine {
     
     this.state = GameState.FINISHED;
     this.stats.stop();
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
+    }
     this.notifyListeners();
   }
 
@@ -101,6 +106,10 @@ export class TypingEngine {
     this.stats.reset();
     this.currentTyped = "";
     this.wordProvider.reset();
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
+    }
     this.notifyListeners();
   }
 

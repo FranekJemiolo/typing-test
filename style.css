@@ -38,6 +38,25 @@ body {
   text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
 }
 
+.timer {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: var(--accent-color);
+  font-weight: bold;
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.timer-label {
+  color: #888;
+  font-size: 28px;
+  margin-right: 10px;
+}
+
+.timer-value {
+  font-family: 'Courier New', monospace;
+  font-size: 48px;
+}
+
 .stats-panel {
   display: flex;
   justify-content: center;
