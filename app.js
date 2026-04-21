@@ -64,10 +64,10 @@ engine.onStateChange((state, stats) => {
   } else if (state === GameState.IDLE) {
     input.disabled = false;
     input.value = "";
-    input.style.display = "block";
-    wordBox.style.display = "inline-block";
-    document.querySelector(".input-container").style.display = "block";
-    document.querySelector(".controls").style.display = "block";
+    input.style.display = "";
+    wordBox.style.display = "";
+    document.querySelector(".input-container").style.display = "";
+    document.querySelector(".controls").style.display = "";
     resultsPanel.hide();
     timerValueElement.textContent = "60";
   }
@@ -117,10 +117,10 @@ function handleRestart() {
   updateStatsDisplay(engine.getStats());
   input.disabled = false;
   input.value = "";
-  input.style.display = "block";
-  wordBox.style.display = "inline-block";
-  document.querySelector(".input-container").style.display = "block";
-  document.querySelector(".controls").style.display = "block";
+  input.style.display = "";
+  wordBox.style.display = "";
+  document.querySelector(".input-container").style.display = "";
+  document.querySelector(".controls").style.display = "";
   timerValueElement.textContent = "60";
   input.focus();
 }
