@@ -1,0 +1,66 @@
+export class StatsTracker {
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
+    this.keysPressed = 0;
+    this.correctChars = 0;
+    this.errors = 0;
+    this.startTime = null;
+    this.endTime = null;
+  }
+
+  start() {
+    this.startTime = Date.now();
+  }
+
+  stop() {
+    this.endTime = Date.now();
+  }
+
+  recordKey() {
+    this.keysPressed++;
+  }
+
+  recordCorrect() {
+    this.correctChars++;
+  }
+
+  recordError() {
+    this.errors++;
+  }
+
+  getElapsedTime() {
+    if (!this.startTime) return 0;
+    const end = this.endTime || Date.now();
+    return (end - this.startTime) / 1000; // in seconds
+  }
+
+  getElapsedTimeMinutes() {
+    return this.getElapsedTime() / 60;
+  }
+
+  getWPM() {
+    const elapsedMinutes = this.getElapsedTimeMinutes();
+    if (elapsedMinutes <= 0) return 0;
+    // Standard: 1 word = 5 characters
+    return Math.round((this.correctChars / 5) / elapsedMinutes);
+  }
+
+  getAccuracy() {
+    if (this.keysPressed === 0) return 100;
+    return Math.round((this.correctChars / this.keysPressed) * 100);
+  }
+
+  getStats() {
+    return {
+      keysPressed: this.keysPressed,
+      correctChars: this.correctChars,
+      errors: this.errors,
+      wpm: this.getWPM(),
+      accuracy: this.getAccuracy(),
+      elapsedTime: this.getElapsedTime()
+    };
+  }
+}
