@@ -43,13 +43,20 @@ export class ResultsPanel {
 
     this.container.appendChild(this.panel);
 
-    document.getElementById("result-download-btn").addEventListener("click", () => {
-      this.onDownload(stats);
-    });
+    const downloadBtn = this.panel.querySelector("#result-download-btn");
+    const restartBtn = this.panel.querySelector("#result-restart-btn");
 
-    document.getElementById("result-restart-btn").addEventListener("click", () => {
-      this.onRestart();
-    });
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", () => {
+        this.onDownload(stats);
+      });
+    }
+
+    if (restartBtn) {
+      restartBtn.addEventListener("click", () => {
+        this.onRestart();
+      });
+    }
   }
 
   hide() {

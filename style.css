@@ -254,11 +254,15 @@ body {
 
 .result-buttons {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  margin-top: 50px;
 }
 
 .result-buttons .btn {
-  min-width: 180px;
+  min-width: 220px;
+  padding: 18px 40px;
+  font-size: 18px;
+  border-radius: 10px;
 }
 
 @media (max-width: 768px) {
