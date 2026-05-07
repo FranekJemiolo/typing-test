@@ -118,6 +118,113 @@ The app follows a clean separation of concerns:
 
 This architecture makes the codebase maintainable and easy to extend.
 
+### Architecture Diagram
+
+```mermaid
+graph TD
+    A[Browser] --> B[TypeRacer Lite App]
+    
+    B --> C[Core Engine]
+    B --> D[UI Layer]
+    B --> E[Export System]
+    
+    C --> F[Game State Manager]
+    C --> G[Statistics Calculator]
+    C --> H[Word Provider]
+    
+    D --> I[Renderer]
+    D --> J[Results Panel]
+    D --> K[Theme Manager]
+    
+    E --> L[Image Generator]
+    E --> M[Card Handler]
+    
+    F --> N[Game State]
+    F --> O[Input Handler]
+    F --> P[Timer System]
+    
+    G --> Q[WPM Calculator]
+    G --> R[Accuracy Calculator]
+    G --> S[Error Tracker]
+    
+    H --> T[Word List]
+    H --> U[Random Selector]
+    
+    I --> V[Word Display]
+    I --> W[Character Highlighting]
+    I --> X[Visual Feedback]
+    
+    J --> Y[Results Display]
+    J --> Z[Metrics Panel]
+    
+    K --> AA[Dark Theme]
+    K --> BB[F1 Telemetry Style]
+    
+    L --> CC[Canvas Renderer]
+    L --> DD[Image Generation]
+    M --> EE[Download Handler]
+    M --> FF[Share System]
+    
+    subgraph "Core Logic"
+        N --> GG[Active Game]
+        N --> HH[Completed State]
+        O --> II[Keystroke Capture]
+        O --> JJ[Input Validation]
+        P --> KK[Time Tracking]
+        P --> LL[Duration Calculation]
+    end
+    
+    subgraph "Statistics"
+        Q --> MM[Words Per Minute]
+        Q --> NN[Character Count]
+        R --> OO[Accuracy Percentage]
+        R --> PP[Correct Characters]
+        S --> QQ[Error Detection]
+        S --> RR[Mistake Tracking]
+    end
+    
+    subgraph "Word System"
+        T --> UU[Word Display]
+        T --> VV[Character Position]
+        W --> WW[Green Highlight]
+        W --> XX[Red Highlight]
+        W --> YY[Current Position]
+    end
+    
+    subgraph "Export Pipeline"
+        DD --> ZZ[1200x630 PNG]
+        DD --> AAA[Result Card Design]
+        EE --> BBB[Image Download]
+        FF --> CCC[Shareable Link]
+    end
+    
+    subgraph "UI Components"
+        DDD[Input Field] --> O
+        EEE[Start Button] --> N
+        FFF[Reset Button] --> N
+        GGG[Results Panel] --> Y
+        HHH[Share Button] --> EE
+    end
+    
+    subgraph "Data Flow"
+        O --> Q
+        Q --> R
+        R --> Z
+        Z --> DD
+        DD --> EE
+    end
+    
+    subgraph "Styling System"
+        AA --> III[CSS Variables]
+        BB --> JJJ[Dark Theme]
+        BB --> KKK[Telemetry Design]
+        III --> LLL[Background Color]
+        III --> MMM[Text Color]
+        III --> NNN[Accent Color]
+        III --> OOO[Error Color]
+    end
+```
+
 ## Browser Support
 
 - Chrome/Edge (latest)
